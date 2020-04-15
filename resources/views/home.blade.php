@@ -22,7 +22,7 @@
                                 <a href="{{route('role.index')}}">Roles</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="">Permission</a>
+                                <a href="{{route('permission.index')}}">Permission</a>
                             </li>
                             <li class="list-group-item">
                                 <a href="">Users</a>

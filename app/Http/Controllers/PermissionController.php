@@ -14,7 +14,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::all();
+        return  view('admin.permission.list',compact('permissions'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return  view('admin.permission.new');
     }
 
     /**
@@ -35,7 +36,12 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           'role_id'=>'required|unique:permissions',
+           'permission'=>'required'
+        ]);
+        Permission::create($request->all());
+        return redirect()->route('permission.index');
     }
 
     /**
@@ -57,7 +63,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+       return  view('admin.permission.edit',compact('permission'));
     }
 
     /**
@@ -69,7 +75,12 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $request->validate([
+            'role_id'=>'required|unique:permissions,role_id,'.$permission->id,
+            'permission'=>'required'
+        ]);
+        $permission->update($request->all());
+        return redirect()->route('permission.index');
     }
 
     /**
@@ -80,6 +91,7 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return redirect()->route('permission.index');
     }
 }
