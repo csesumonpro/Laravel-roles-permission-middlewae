@@ -25,7 +25,7 @@
                                 <a href="{{route('permission.index')}}">Permission</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="">Users</a>
+                                <a href="{{route('user.index')}}">Users</a>
                             </li>
                         </ul>
                 </div>
