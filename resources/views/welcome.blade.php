@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Unauthorized Access
                 </div>
 
                 <div class="links">

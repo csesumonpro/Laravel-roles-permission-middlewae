@@ -11,7 +11,7 @@ class Role extends Model
 
     public function permission()
     {
-       return $this->hasOne(Role::class);
+       return $this->hasOne(Permission::class);
     }
 
     public function user()

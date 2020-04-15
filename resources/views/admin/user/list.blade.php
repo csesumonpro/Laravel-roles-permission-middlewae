@@ -10,9 +10,11 @@
     <div class="container">
         <div class="row">
 
-            <h4 class="float-right">
-                <a class="btn btn-primary" href="{{route('user.create')}}">Add New</a>
-            </h4>
+            @isset(auth()->user()->role->permission['permission']['user']['add'])
+                <h4 class="float-right">
+                    <a class="btn btn-primary" href="{{route('user.create')}}">Add New</a>
+                </h4>
+            @endisset
             <table class="table">
 
                 <thead>
@@ -35,8 +37,12 @@
                             <form action="{{route('user.destroy',$user->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{route('user.edit',$user->id)}}" class="btn btn-warning">Edit</a>
-                                <button class="btn btn-danger">Delete</button>
+                                @isset(auth()->user()->role->permission['permission']['user']['edit'])
+                                    <a href="{{route('user.edit',$user->id)}}" class="btn btn-warning">Edit</a>
+                                @endisset
+                                @isset(auth()->user()->role->permission['permission']['user']['delete'])
+                                    <button class="btn btn-danger">Delete</button>
+                                @endisset
                             </form>
                         </td>
                     </tr>

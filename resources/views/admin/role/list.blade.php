@@ -9,9 +9,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <h4 class="float-right">
-                <a class="btn btn-primary" href="{{route('role.create')}}">Add New</a>
-            </h4>
+            @isset(auth()->user()->role->permission['permission']['role']['add'])
+                <h4 class="float-right">
+                    <a class="btn btn-primary" href="{{route('role.create')}}">Add New</a>
+                </h4>
+            @endisset
             <table class="table">
 
                 <thead>
@@ -30,8 +32,12 @@
                             <form action="{{route('role.destroy',$role->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{route('role.edit',$role->id)}}" class="btn btn-warning">Edit</a>
-                                <button class="btn btn-danger">Delete</button>
+                                @isset(auth()->user()->role->permission['permission']['role']['edit'])
+                                    <a href="{{route('role.edit',$role->id)}}" class="btn btn-warning">Edit</a>
+                                @endisset
+                                @isset(auth()->user()->role->permission['permission']['role']['delete'])
+                                    <button class="btn btn-danger">Delete</button>
+                                @endisset
                             </form>
                         </td>
                     </tr>

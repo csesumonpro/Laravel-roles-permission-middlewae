@@ -9,10 +9,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-
-            <h4 class="float-right">
-                <a class="btn btn-primary" href="{{route('permission.create')}}">Add New</a>
-            </h4>
+            @isset(auth()->user()->role->permission['permission']['permission']['add'])
+                <h4 class="float-right">
+                    <a class="btn btn-primary" href="{{route('permission.create')}}">Add New</a>
+                </h4>
+            @endisset
             <table class="table">
 
                 <thead>
@@ -31,8 +32,13 @@
                             <form action="{{route('permission.destroy',$permission->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{route('permission.edit',$permission->id)}}" class="btn btn-warning">Edit</a>
-                                <button class="btn btn-danger">Delete</button>
+                                @isset(auth()->user()->role->permission['permission']['permission']['edit'])
+                                    <a href="{{route('permission.edit',$permission->id)}}"
+                                       class="btn btn-warning">Edit</a>
+                                @endisset
+                                @isset(auth()->user()->role->permission['permission']['permission']['delete'])
+                                    <button class="btn btn-danger">Delete</button>
+                                @endisset
                             </form>
                         </td>
                     </tr>
